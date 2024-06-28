@@ -4,7 +4,7 @@ import useListeners from "hooks/useListeners";
 
 import { InputProperties, InputHandle } from "common/types";
 
-const Input = React.forwardRef<InputHandle, InputProperties>(({ type = "text" }, ref) => {
+const Input = React.forwardRef<InputHandle, InputProperties>(({ type = "text", onInputChange = () => {} }, ref) => {
     const { addListener, removeListener, notify, kill } = useListeners<string>();
 
     useImperativeHandle(
@@ -25,6 +25,7 @@ const Input = React.forwardRef<InputHandle, InputProperties>(({ type = "text" },
     }
 
     useEffect(() => {
+        addListener(onInputChange);
         return kill;
     }, []);
 

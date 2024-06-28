@@ -34,6 +34,7 @@ const PasswordInputStrength = React.forwardRef<PasswordInputStrengthHandle, Reac
                                                 backgroundColor:
                                                     index <= entropyLevel ? PASSWORD_STRENGTH_TIERS[entropyLevel]?.color : undefined,
                                             }}
+                                            key={index}
                                         />
                                     );
                                 })}

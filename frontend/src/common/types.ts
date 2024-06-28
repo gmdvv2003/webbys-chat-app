@@ -38,6 +38,16 @@ export interface UserSession {
 }
 
 /*
+    ;; ================================================ ;;
+    ;; ==================== Routes ==================== ;;
+    ;; ================================================ ;;
+*/
+
+export interface AuthRouteProperties {
+    children: React.ReactNode;
+}
+
+/*
     ;; ==================================================== ;;
     ;; ==================== Components ==================== ;;
     ;; ==================================================== ;;
@@ -64,7 +74,7 @@ export interface DescriptiveInputProperties {
 export interface DescriptiveInputHandle {}
 
 // ==================== Button ==================== //
-export interface ButtonProperties {
+export interface ButtonProperties extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
 }
 

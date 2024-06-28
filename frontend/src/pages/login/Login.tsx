@@ -1,15 +1,20 @@
-import { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 
 import DescriptiveInput from "components/DescriptiveInput";
 import Button from "components/Button";
 import RadioButton from "components/RadioButton";
 
 export default function Login() {
+    const [searchParameters] = useSearchParams();
+
     const usernameFieldRef = useRef<HTMLInputElement>(null);
     const passwordFieldRef = useRef<HTMLInputElement>(null);
 
     const [invalidUsernameOrWrongPassword, setInvalidUsernameOrWrongPassword] = useState(false);
+
+    const [messageDescription] = useState(searchParameters.get("message_description"));
+    const [messageDescriptionType] = useState<"error" | "success" | "info">(searchParameters.get("message_description_type") as "error" | "success" | "info");
 
     function onLoginButtonClick() {}
 
@@ -18,11 +23,28 @@ export default function Login() {
             <div className="flex h-screen items-center justify-center bg-gray-100">
                 <div className="flex justify-center">
                     {/* Login Form */}
-                    <div className="flex w-96 flex-col items-center gap-4 rounded-l-lg bg-white px-8">
+                    <div className="flex w-96 flex-col items-center justify-center gap-4 rounded-l-lg bg-white px-8">
                         {/* Login Header */}
                         <div className="mt-8 w-3/5">
                             <h1 className="text-center text-2xl font-bold">Login</h1>
                         </div>
+
+                        {/* Message Description */}
+                        {messageDescription && messageDescription.length > 0 && (
+                            <div
+                                className={`w-full rounded-md p-2 text-center text-sm ${
+                                    messageDescriptionType == "error"
+                                        ? "bg-[#ffd3cbc5] text-[#e04a31]"
+                                        : messageDescriptionType == "success"
+                                          ? "bg-[#7ed321] text-[#ffffff]"
+                                          : messageDescriptionType == "info"
+                                            ? "bg-[#e9f1ff] text-[#055083]"
+                                            : undefined
+                                }`}
+                            >
+                                {messageDescription}
+                            </div>
+                        )}
 
                         {/* Username Form */}
                         <div className="w-full">
@@ -68,7 +90,7 @@ export default function Login() {
 
                     {/* Billboard */}
                     <div className="flex w-96 justify-center rounded-r-lg bg-blue-200 md:hidden">
-                        <img className="object-contain" src="/webbys.png" alt="Webbys" />
+                        <img className="rounded-r-lg object-contain" src="/webbys-banner.jpg" alt="Webbys" />
                     </div>
                 </div>
             </div>

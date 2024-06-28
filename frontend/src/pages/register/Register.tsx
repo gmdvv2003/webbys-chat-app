@@ -63,7 +63,7 @@ export default function Register() {
             <div className="flex h-screen items-center justify-center bg-gray-100">
                 <div className="flex justify-center">
                     {/* Register Form */}
-                    <div className="flex w-96 flex-col items-center gap-4 rounded-lg bg-white px-8">
+                    <div className="flex w-96 flex-col items-center justify-center gap-4 rounded-lg bg-white px-8">
                         {/* Register Header */}
                         <div className="mt-8 w-3/5">
                             <h1 className="text-center text-2xl font-bold">Register</h1>
@@ -111,7 +111,15 @@ export default function Register() {
 
                         {/* Submit Button */}
                         <div className="h-max w-full">
-                            <Button>Register</Button>
+                            {(() => {
+                                const disabled =
+                                    enteredUsername.length == 0 || enteredPassword.length == 0 || enteredConfirmPassword.length == 0;
+                                return (
+                                    <Button className={`${disabled ? "bg-slate-400 text-gray-200" : undefined}`} disabled={disabled}>
+                                        Register
+                                    </Button>
+                                );
+                            })()}
                         </div>
 
                         {/* Login Link */}
@@ -127,7 +135,7 @@ export default function Register() {
 
                     {/* Billboard */}
                     <div className="flex w-96 justify-center rounded-r-lg bg-blue-200 md:hidden">
-                        <img className="object-contain" src="/webbys.png" alt="Webbys" />
+                        <img className="rounded-r-lg object-contain" src="/webbys-banner.jpg" alt="Webbys" />
                     </div>
                 </div>
             </div>
